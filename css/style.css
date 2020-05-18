@@ -1,7 +1,9 @@
 :root {
-  --dark: #5c415d;
+ --black: #10080D;
   --white: #fffcf9;
   --color1: #ff6978;
+  --color2: #9fd7d1;
+  --color3: #5c415d;
 }
 
 * {
@@ -13,10 +15,32 @@
 .wrapper {
   width: 100vw;
   height: 100vh;
-  background: var(--dark);
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 10vh;
 }
 
 video {
-  height: 100px;
-  width: 100px;
+  width: 100vw;
+  height: 70vh;
+}
+
+.bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+}
+
+.cameraBtn {
+  align-self: center;
+  width: 60px;
+  height: 60px;
+  background: var(--white);
+  border: 3px solid rgb(195, 195, 195);
+  border-radius: 100%;
 }

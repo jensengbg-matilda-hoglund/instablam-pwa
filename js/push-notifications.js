@@ -1,11 +1,10 @@
 export default () => {
   let servicew;
-  //Genereras på servern
+
   const publicKey =
     "BOZGoy3XBimNMwTFc08sctwfCsKAkZYb3LDUCx39ecNv4KeBkIDBIfvi0IniaCLG2KTWpxxBYdV8H_tUFbj_RSs";
 
   if ("serviceWorker" in navigator && "PushManager" in window) {
-    //Hämta våran service worker och sedan kolla om vi redan har en subscription
     navigator.serviceWorker.ready.then((sw) => {
       servicew = sw;
       sw.pushManager.getSubscription().then((subscription) => {
@@ -30,7 +29,7 @@ export default () => {
   };
 
   //Skickar vår endpoint för att användas på servern
-  async function saveSubscription(subscription) {
+  const saveSubscription = async(subscription) => {
     const url = "http://localhost/notifications/save";
 
     const response = await fetch(url, {
@@ -43,7 +42,7 @@ export default () => {
     const data = await response.json();
   }
 
-  document.querySelector("#test").addEventListener("click", (event) => {
+  document.getElementById("test").addEventListener("click", (event) => {
     event.srcElement.disabled = true;
 
     //Hämtar eventuell subscription och ifall vi har en så gör vi en unsubscribe

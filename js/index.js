@@ -1,7 +1,8 @@
 import {
-  requestNotificationPermission,
+  reqNPermission,
   createNotification,
 } from "./notifications.js";
+
 import push from "./push-notifications.js";
 
 let stream = null;
@@ -14,7 +15,7 @@ document.addEventListener("touchstart", () => {
   }, 1000);
 });
 
-const randomiseHue = (videoElem) => {
+/* const randomiseHue = (videoElem) => {
   let i = 0;
   let interval = setInterval(() => {
     let number = Math.floor(Math.random() * 360);
@@ -25,7 +26,7 @@ const randomiseHue = (videoElem) => {
       clearInterval(interval);
     }
   }, 2000);
-};
+}; */
 
 const captureImage = async (stream) => {
   const mediaTrack = stream.getVideoTracks()[0];
@@ -60,17 +61,17 @@ getMedia();
   captureImage(stream);
 }); */
 
-const registrateServiceWorker = () => {
+const regSW = () => {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
       .register("../sw.js")
-      .then((registration) => {
-        console.log("Registered service worker");
+      .then(() => {
+        console.log("SW working");
         push();
       })
-      .catch((error) => console.log("Error with register service worker"));
+      .catch(() => console.log("Error register SW"));
   }
 };
 
-registrateServiceWorker();
-requestNotificationPermission();
+regSW();
+reqNPermission();

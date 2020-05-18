@@ -8,7 +8,7 @@ self.addEventListener("install", (event) => {
   console.log("SW installed at: ", new Date().toLocaleTimeString());
 });
 
-self.addEventListener("activate", (event) => {
+self.addEventListener("activate", () => {
   self.skipWaiting();
   console.log("SW activated at: ", new Date().toLocaleTimeString());
 });
@@ -32,7 +32,7 @@ self.addEventListener("fetch", (event) => {
   }
 });
 
-async function updateCache(request) {
+const updateCache = async (request) => {
   /*Med async/await
   const response = await fetch(request);
   const cache = await caches.open('v1');
