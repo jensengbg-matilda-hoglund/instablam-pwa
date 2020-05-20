@@ -1,11 +1,12 @@
-import {
-  reqNPermission,
-  createNotification,
-} from "./notifications.js";
+import { reqNPermission, createNotification } from "./notifications.js";
 
 import push from "./push-notifications.js";
 
 let stream = null;
+
+const image = document.getElementById("image");
+const camera = document.getElementById("camera");
+const download = document.getElementById("downloadImg");
 
 document.addEventListener("touchstart", () => {
   setTimeout(() => {
@@ -15,7 +16,7 @@ document.addEventListener("touchstart", () => {
   }, 1000);
 });
 
-/* const randomiseHue = (videoElem) => {
+const randomiseHue = (videoElem) => {
   let i = 0;
   let interval = setInterval(() => {
     let number = Math.floor(Math.random() * 360);
@@ -26,23 +27,43 @@ document.addEventListener("touchstart", () => {
       clearInterval(interval);
     }
   }, 2000);
-}; */
-
+};
+// take photo
 const captureImage = async (stream) => {
   const mediaTrack = stream.getVideoTracks()[0];
+
   console.log(mediaTrack);
   const captureImg = new ImageCapture(mediaTrack);
   const photo = await captureImg.takePhoto();
-  console.log(photo);
   const imgUrl = URL.createObjectURL(photo);
+
+  console.log(photo);
   console.log(imgUrl);
-  document.querySelector("#photo").src = imgUrl;
+
+  image.src = imgUrl;
+  image.style.display = "flex";
+  camera.style.display = "none";
+  download.style.display = "flex";
 };
 
+//download image
+document.getElementById("downloadImg").addEventListener("click", () => {
+  const downloadElem = document.createElement("a");
+  document.body.appendChild(downloadElem);
+
+  downloadElem.style.display = "none";
+  downloadElem.download = "myImage";
+  downloadElem.href = image.src;
+  downloadElem.click();
+
+  document.body.removeChild(downloadElem);
+});
+
+// get camera
 const getMedia = async () => {
   try {
     stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    const videoElem = document.getElementById("me");
+    const videoElem = document.getElementById("camera");
     videoElem.srcObject = stream;
     videoElem.addEventListener("loadedmetadata", () => {
       videoElem.play();
@@ -56,10 +77,9 @@ const getMedia = async () => {
 
 getMedia();
 
-/* document.querySelector("#addImg").addEventListener("click", () => {
-  //document.querySelector('.shakespeare').classList.toggle('hide');
+document.getElementById("addImg").addEventListener("click", () => {
   captureImage(stream);
-}); */
+});
 
 const regSW = () => {
   if ("serviceWorker" in navigator) {
