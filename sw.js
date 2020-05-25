@@ -33,17 +33,16 @@ self.addEventListener("fetch", (event) => {
 });
 
 const updateCache = async (request) => {
-  /*Med async/await
   const response = await fetch(request);
-  const cache = await caches.open('v1');
+  const cache = await caches.open("v1");
   const data = await cache.put(request, response.clone());
-  return response;*/
+  return data;
 
-  return fetch(request).then((response) => {
+  /* return fetch(request).then((response) => {
     return caches.open("v1").then((cache) => {
       return cache.put(request, response.clone()).then(() => {
         return response;
       });
     });
-  });
-}
+  }); */
+};

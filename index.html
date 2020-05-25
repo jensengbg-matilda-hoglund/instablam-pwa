@@ -21,6 +21,10 @@
   <body>
     <section class="wrapper">
       <header class="header">
+        <button class="notifications">
+          <i id="notificationsOff" class="far fa-bell-slash"></i
+          ><i id="notificationsOn" class="far fa-bell"></i>
+        </button>
         <button id="downloadImg">
           <img src="assets/images/download.svg" alt="download img" />
         </button>
@@ -29,7 +33,70 @@
         <video id="camera"></video>
         <img src="" id="image" />
       </main>
-      <div class="bottom"><button class="cameraBtn" id="addImg"></button></div>
+      <section class="bottom">
+        <button class="cameraBtn" id="addImg"></button>
+        <section class="imgSettings">
+          <div class="sliderDiv">
+            <input
+              type="range"
+              min="-20"
+              max="20"
+              value="0"
+              class="slider"
+              id="brightnessRange"
+            />
+            <input
+              type="range"
+              min="-20"
+              max="20"
+              value="0"
+              class="slider"
+              id="contrastRange"
+            />
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              value="0"
+              class="slider"
+              id="saturationRange"
+            />
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              class="slider"
+              id="sepiaRange"
+            />
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              class="slider"
+              id="sharpenRange"
+            />
+          </div>
+          <div class="settings">
+            <button class="settingBtn" id="brightness">
+              <i class="fas fa-sun"></i>
+            </button>
+            <button class="settingBtn" id="contrast">
+              <i class="fas fa-adjust"></i>
+            </button>
+            <button class="settingBtn" id="saturation">
+              <i class="fas fa-tint"></i>
+            </button>
+            <button class="settingBtn" id="sepia">
+              <i class="fas fa-fish"></i>
+            </button>
+            <button class="settingBtn" id="sharpen">
+              <i class="fas fa-ice-cream"></i>
+            </button>
+          </div>
+        </section>
+      </section>
     </section>
     <script type="module" src="./js/index.js"></script>
   </body>

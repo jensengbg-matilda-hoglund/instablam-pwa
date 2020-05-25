@@ -28,41 +28,41 @@ export default () => {
     return outputArray;
   };
 
-  //Skickar vår endpoint för att användas på servern
-  const saveSubscription = async(subscription) => {
-    const url = "http://localhost/notifications/save";
+  const saveSubscription = async (subscription) => {
+    const url = "https://localhost/notifications/save";
 
     const response = await fetch(url, {
       method: "POST",
+      //mode: "cors",
       body: JSON.stringify(subscription),
       headers: {
         "Content-Type": "application/json",
       },
     });
     const data = await response.json();
-  }
+    console.log(data);
+  };
 
-  document.getElementById("test").addEventListener("click", (event) => {
-    event.srcElement.disabled = true;
+  document.querySelector(".notifications").addEventListener("click", () => {
+    const notificationsOff = document.querySelector("#notificationsOff");
+    const notificationsOn = document.querySelector("#notificationsOn");
 
-    //Hämtar eventuell subscription och ifall vi har en så gör vi en unsubscribe
-    //Ifall vi inte har subscription så börjar vi prenumerera på notiser och skickar till servern
-    //Vår subscription
     servicew.pushManager.getSubscription().then(async (subscription) => {
       if (subscription) {
-        subscription.unsubscribe(); //Sluta prenumerera på push notiser
-        event.srcElement.disabled = false;
+        subscription.unsubscribe();
+        notificationsOff.style.display = "flex";
+        notificationsOn.style.display = "none";
       } else {
         try {
-          //Börja prenumerera på push notiser och returnerar en subscription med en endpoint
-          //som vi sparar på servern
           const subscribed = await servicew.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlB64ToUint8Array(publicKey),
           });
           saveSubscription(subscribed);
           console.log(subscribed);
-          event.srcElement.disabled = false;
+
+          notificationsOff.style.display = "none";
+          notificationsOn.style.display = "flex";
         } catch (error) {}
       }
     });

@@ -1,9 +1,6 @@
 :root {
   --black: #10080d;
   --white: #fffcf9;
-  --color1: #ff6978;
-  --color2: #9fd7d1;
-  --color3: #5c415d;
 }
 
 * {
@@ -31,8 +28,34 @@ button:focus {
 
 .header {
   height: 10vh;
+  width: 100vw;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.notifications {
+  background: none;
+  border: none;
+  display: flex;
+  margin-left: 1.5rem;
+  width: 3.3rem;
+  height: 3.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.notifications > i {
+  font-size: 2rem;
+  color: var(--white);
+  opacity: 0.8;
+}
+
+#notificationsOn {
+  display: flex;
+}
+#notificationsOff {
+  display: none;
 }
 
 #downloadImg {
@@ -53,7 +76,7 @@ button:focus {
 }
 
 main {
-  height: 70vh;
+  height: 60vh;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -69,11 +92,16 @@ video {
   width: 100%;
 }
 
+canvas {
+  max-width: 100%;
+  max-height: auto;
+}
+
 .bottom {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20vh;
+  height: 30vh;
 }
 
 .cameraBtn {
@@ -81,8 +109,60 @@ video {
   width: 60px;
   height: 60px;
   background: var(--white);
-  border: 3px solid rgb(185, 185, 185);
+  border: 3px solid rgb(195, 195, 195);
   border-radius: 100%;
-  opacity: 0.7;
+  opacity: 0.8;
   cursor: pointer;
+}
+
+.imgSettings {
+  display: none;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.settings {
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+}
+
+.settingBtn {
+  background: none;
+  border: 0.5px solid rgba(255, 255, 255, 0.698);
+  border-radius: 100%;
+  padding: 0.5rem;
+  width: 58px;
+  height: 58px;
+  margin: 2rem 0;
+}
+
+.settingBtn > i {
+  font-size: 2.5em;
+  color: var(--white);
+  opacity: 0.8;
+}
+
+/* Sliders */
+
+.slider {
+  width: 14rem;
+}
+
+#brightnessRange {
+  display: none;
+}
+#contrastRange {
+  display: none;
+}
+#saturationRange {
+  display: none;
+}
+#sepiaRange {
+  display: none;
+}
+#sharpenRange {
+  display: none;
 }
