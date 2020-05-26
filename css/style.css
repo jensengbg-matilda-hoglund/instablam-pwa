@@ -28,7 +28,7 @@ button:focus {
 
 .header {
   height: 10vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -77,7 +77,7 @@ button:focus {
 
 main {
   height: 60vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -127,6 +127,7 @@ canvas {
   display: flex;
   justify-content: space-evenly;
   width: 90%;
+  margin-top: 3rem;
 }
 
 .settingBtn {
@@ -146,7 +147,6 @@ canvas {
 }
 
 /* Sliders */
-
 .slider {
   width: 14rem;
 }
@@ -165,4 +165,24 @@ canvas {
 }
 #sharpenRange {
   display: none;
+}
+
+@media only screen and (min-width: 700px) {
+  .bottom {
+    margin-top: auto;
+    height: 20vh;
+  }
+
+  main {
+    justify-content: center;
+  }
+
+  #image {
+    width: 650px;
+    height: 520px;
+  }
+  canvas {
+    max-width: 650px;
+    max-height: 515px;
+  }
 }

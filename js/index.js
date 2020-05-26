@@ -16,18 +16,6 @@ document.addEventListener("touchstart", () => {
   }, 1000);
 });
 
-const randomiseHue = (videoElem) => {
-  let i = 0;
-  let interval = setInterval(() => {
-    let number = Math.floor(Math.random() * 360);
-    let number2 = Math.floor(Math.random() * 10);
-    videoElem.style.filter = `hue-rotate(${number}deg) blur(${number2}px)`;
-    i++;
-    if (i == 10) {
-      clearInterval(interval);
-    }
-  }, 2000);
-};
 // take photo
 const captureImage = async (stream) => {
   const mediaTrack = stream.getVideoTracks()[0];
@@ -78,7 +66,6 @@ const getMedia = async () => {
     videoElem.srcObject = stream;
     videoElem.addEventListener("loadedmetadata", () => {
       videoElem.play();
-      randomiseHue(videoElem);
     });
     console.log(stream);
   } catch (error) {
@@ -199,7 +186,6 @@ saturationRange.addEventListener("input", (e) => {
 });
 
 saturation.addEventListener("click", () => {
-  console.log("here");
   saturationRange.style.display = "flex";
   contrastRange.style.display = "none";
   brightnessRange.style.display = "none";
