@@ -1,3 +1,5 @@
+import saveSubscription from "./js/push-notifications";
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open("v1").then((cache) => {
@@ -27,22 +29,20 @@ self.addEventListener("fetch", (event) => {
       })
     );
   } else {
-    console.log("Online!");
-    return updateCache(event.request);
+    if (event.request.method === "GET") {
+      return updateCache(event.request);
+    } else {
+      saveSubscription();
+    }
   }
 });
 
 const updateCache = async (request) => {
-  const response = await fetch(request);
-  const cache = await caches.open("v1");
-  const data = await cache.put(request, response.clone());
-  return data;
-
-  /* return fetch(request).then((response) => {
+  return fetch(request).then((response) => {
     return caches.open("v1").then((cache) => {
       return cache.put(request, response.clone()).then(() => {
         return response;
       });
     });
-  }); */
+  });
 };

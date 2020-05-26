@@ -4,7 +4,7 @@ const reqNPermission = () => {
   });
 };
 
-const createNotification = (imgLink) => {
+const createNotification = () => {
   const icon = "assets/images/instablam-icon.jpg";
 
   const notification = new Notification("New photo saved", {
@@ -12,7 +12,7 @@ const createNotification = (imgLink) => {
   });
 
   notification.addEventListener("click", () => {
-    window.open(imgLink);
+    window.open();
   });
 };
 

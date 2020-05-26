@@ -1,5 +1,7 @@
 export default () => {
   let servicew;
+  const notificationsOff = document.querySelector("#notificationsOff");
+  const notificationsOn = document.querySelector("#notificationsOn");
 
   const publicKey =
     "BOZGoy3XBimNMwTFc08sctwfCsKAkZYb3LDUCx39ecNv4KeBkIDBIfvi0IniaCLG2KTWpxxBYdV8H_tUFbj_RSs";
@@ -33,7 +35,7 @@ export default () => {
 
     const response = await fetch(url, {
       method: "POST",
-      //mode: "cors",
+      //mode: "same-origin",
       body: JSON.stringify(subscription),
       headers: {
         "Content-Type": "application/json",
@@ -43,15 +45,28 @@ export default () => {
     console.log(data);
   };
 
-  document.querySelector(".notifications").addEventListener("click", () => {
-    const notificationsOff = document.querySelector("#notificationsOff");
-    const notificationsOn = document.querySelector("#notificationsOn");
-
-    servicew.pushManager.getSubscription().then(async (subscription) => {
-      if (subscription) {
-        subscription.unsubscribe();
+  const unsubscribeUser = () => {
+    servicew.pushManager
+      .getSubscription()
+      .then((subscription) => {
+        if (subscription) {
+          return subscription.unsubscribe();
+        }
+      })
+      .catch((error) => {
+        console.log("Error unsubscribing", error);
+      })
+      .then(() => {
         notificationsOff.style.display = "flex";
         notificationsOn.style.display = "none";
+        console.log("User is unsubscribed but it's working anyway.");
+      });
+  };
+
+  document.querySelector(".notifications").addEventListener("click", () => {
+    servicew.pushManager.getSubscription().then(async (subscription) => {
+      if (subscription) {
+        unsubscribeUser();
       } else {
         try {
           const subscribed = await servicew.pushManager.subscribe({

@@ -60,7 +60,8 @@ document.getElementById("downloadImg").addEventListener("click", () => {
     downloadElem.href = document.getElementById("image").toDataURL();
     downloadElem.click();
     document.body.removeChild(downloadElem);
-    createNotification(downloadElem.href);
+    const imageUrl = canvas.toDataURL("image/jpg");
+    createNotification(imageUrl);
   } else {
     downloadElem.href = image.src;
     downloadElem.click();
